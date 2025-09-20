@@ -3,4 +3,5 @@ export { AboutSection } from './About/AboutSection';
 export { SkillsSection } from './Skills/SkillsSection';
 export { ServicesSection } from './Services/ServicesSection';
 export { ProjectsSection } from './Projects/ProjectsSection';
+export { ExperienceSection } from './Experience/ExperienceSection';
 export { ContactSection } from './Contact/ContactSection';

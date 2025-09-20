@@ -4,7 +4,8 @@ import {
   HeroSection, 
   AboutSection, 
   SkillsSection,
-  ServicesSection, 
+  ServicesSection,
+  ExperienceSection,
   // ProjectsSection, 
   ContactSection 
 } from './sections';
@@ -16,8 +17,9 @@ function App() {
       <AppShell>
         <HeroSection />
         <AboutSection />
-        <SkillsSection />
         <ServicesSection />
+        <SkillsSection />
+        <ExperienceSection />
         {/* <ProjectsSection /> */}
         <ContactSection />
       </AppShell>
