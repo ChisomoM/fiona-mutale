@@ -1,6 +1,7 @@
 import React from 'react';
 import { CVDownloadButton } from '../../components/domain';
 import { siteData } from '../../data/site';
+import { seedDatabase } from '../../lib/seed'
 
 export const HeroSection: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -41,8 +42,18 @@ export const HeroSection: React.FC = () => {
           {/* Welcome text */}
           <div className="space-y-4">
             <p 
-              className="font-medium tracking-widest uppercase text-xs"
+              className="font-medium tracking-widest cursor-pointer uppercase text-xs hover:"
               style={{ color: 'var(--color-primary-300)' }}
+              onClick={ async ()=> {
+                try {
+                  await seedDatabase();
+                  alert("Seeding successful")
+                } catch (e) {
+                  alert(`seeding failed! ${e}`)
+                }
+                
+              }}
+              
             >
               Welcome to my world ✨
             </p>

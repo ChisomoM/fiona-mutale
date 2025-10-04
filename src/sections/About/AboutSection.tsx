@@ -6,7 +6,7 @@ import { siteData } from '../../data/site';
 export const AboutSection: React.FC = () => {
   return (
     <section 
-      id="about" 
+      id="about-me" 
       className="py-20 relative overflow-hidden"
       style={{ 
         background: 'linear-gradient(to bottom, transparent, var(--color-surface), var(--color-background))'

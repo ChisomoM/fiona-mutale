@@ -1,3 +1,6 @@
+import type { Service } from "../lib/types";
+
+
 interface Experience {
   role: string;
   company: string;
@@ -22,11 +25,7 @@ interface Skills {
   business: string[];
 }
 
-interface Service {
-  title: string;
-  description: string;
-  features: string[];
-}
+
 
 interface SiteData {
   name: string;
@@ -189,22 +188,32 @@ Passionate about continuous improvement and agile methodologies, I help organiza
     {
       title: "NetSuite Implementation & Configuration",
       description: "Complete NetSuite setup including account configuration, GL structure, and finance module customization tailored to your business needs.",
-      features: ["Account Setup", "Chart of Accounts", "Tax Configuration", "Multi-Currency Support"]
+      features: ["Account Setup", "Chart of Accounts", "Tax Configuration", "Multi-Currency Support"],
+      icon: "",
+      order: 1, 
+
     },
     {
       title: "Data Migration & Validation",
       description: "Seamless migration of historical data with comprehensive validation and reconciliation processes.",
       features: ["Historical Data Transfer", "Data Validation", "Reconciliation", "Testing Protocols"]
-    },
+    ,
+    icon: "",
+      order: 2, 
+  },
     {
       title: "Finance Process Automation",
       description: "Streamline manual finance tasks through intelligent automation and workflow optimization.",
       features: ["Automated Reporting", "Workflow Design", "BlackLine Integration", "Month-End Automation"]
-    },
+   ,
+    icon: "",
+      order: 3,  },
     {
       title: "Training & Change Management",
       description: "Comprehensive user training and change management to ensure successful system adoption.",
       features: ["User Training", "Documentation", "Support Plans", "Adoption Strategies"]
+    ,  icon: "",
+      order: 4, 
     }
   ],
   

@@ -10,6 +10,7 @@ export interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
   const navItems = [
     { id: 'home', label: 'Home' },
+        { id: 'about-me', label: 'About Me' },
     { id: 'services', label: 'Services' },
     { id: 'projects', label: 'My Work' },
     // { id: 'about', label: 'Reviews' },

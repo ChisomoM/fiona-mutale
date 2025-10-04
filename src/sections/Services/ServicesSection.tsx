@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { Container, SectionHeader } from '../../components/ui';
-import { siteData } from '../../data/site';
 import { 
   Settings, 
   Database, 
   Zap, 
   GraduationCap 
 } from 'lucide-react';
+
+
+import { db } from '../../lib/firebase';
+import type { Service } from '../../lib/types';
+import { collection, getDocs } from 'firebase/firestore';
 
 // Service icons mapping
 const serviceIcons: { [key: string]: React.ComponentType<{ size?: number; className?: string }> } = {
@@ -17,6 +21,29 @@ const serviceIcons: { [key: string]: React.ComponentType<{ size?: number; classN
 };
 
 export const ServicesSection: React.FC = () => {
+  const [services, setServices] = useState<Service[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setLoading(true);
+        const querySnapshot = await getDocs(collection(db, 'services'));
+        const servicesData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setServices(servicesData as unknown as Service[]);
+      } catch(e) {
+        console.log(`Error fetching Services ${e}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchServices();
+  }, []);
+
   return (
     <section id="services" className="py-20 bg-gradient-to-b from-transparent via-gray-900/50 to-transparent relative overflow-hidden">
       {/* Background decorations */}
@@ -36,7 +63,9 @@ export const ServicesSection: React.FC = () => {
           {/* Services grid */}
           <div className="mt-16">
             <div className="grid md:grid-cols-2 gap-8">
-              {siteData.services.map((service) => {
+              {
+              loading ? (<p>Loading Services...</p>) : (
+              services.map((service) => {
                 const IconComponent = serviceIcons[service.title] || Settings;
                 
                 return (
@@ -68,11 +97,14 @@ export const ServicesSection: React.FC = () => {
                             {feature}
                           </span>
                         </div>
-                      ))}
+                      )
+                      )}
                     </div>
                   </div>
                 );
-              })}
+             
+             }
+             ))}
             </div>
           </div>
 
