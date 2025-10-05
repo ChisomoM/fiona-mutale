@@ -48,7 +48,8 @@ export const MetadataAdmin = () => {
             setLoading(true);
             const data = await getSiteMetadata();
             if (data) {
-                setFormData(data);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                setFormData(data as any);
             }
         } catch (error) {
             console.error('Error loading metadata:', error);

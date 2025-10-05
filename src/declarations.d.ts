@@ -6,3 +6,4 @@ declare module 'firebase/firestore' {
 declare module 'firebase/app' {
   export * from '@firebase/app';
 }
+declare module 'firebase/storage';
