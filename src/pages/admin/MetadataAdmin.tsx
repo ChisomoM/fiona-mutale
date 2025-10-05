@@ -9,6 +9,7 @@ export const MetadataAdmin = () => {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
     const [formData, setFormData] = useState<{
+        id?: string;
         name: string;
         title: string;
         initials: string;
