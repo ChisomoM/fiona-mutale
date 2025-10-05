@@ -17,7 +17,8 @@ import type { Experience, Education, SkillCategory, Service } from './types';
 export const getServices = async () => {
     const q = query(collection(db, 'services'), orderBy('order', 'asc'));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
 };
 
 export const addService = async (service: Omit<Service, 'createdAt' | 'updatedAt'>) => {
@@ -44,7 +45,8 @@ export const deleteService = async (id: string) => {
 export const getExperience = async () => {
     const q = query(collection(db, 'experience'), orderBy('order', 'asc'));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
 };
 
 export const addExperience = async (experience: Omit<Experience, 'createdAt' | 'updatedAt'>) => {
@@ -71,7 +73,8 @@ export const deleteExperience = async (id: string) => {
 export const getEducation = async () => {
     const q = query(collection(db, 'education'), orderBy('order', 'asc'));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
 };
 
 export const addEducation = async (education: Omit<Education, 'createdAt' | 'updatedAt'>) => {
@@ -98,7 +101,8 @@ export const deleteEducation = async (id: string) => {
 export const getSkillCategories = async () => {
     const q = query(collection(db, 'skillCategories'), orderBy('order', 'asc'));
     const snapshot = await getDocs(q);
-    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
 };
 
 export const addSkillCategory = async (category: Omit<SkillCategory, 'createdAt' | 'updatedAt'>) => {

@@ -29,7 +29,8 @@ export const ServicesSection: React.FC = () => {
       try {
         setLoading(true);
         const querySnapshot = await getDocs(collection(db, 'services'));
-        const servicesData = querySnapshot.docs.map(doc => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const servicesData = querySnapshot.docs.map((doc: any) => ({
           id: doc.id,
           ...doc.data()
         }));
