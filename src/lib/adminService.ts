@@ -129,7 +129,7 @@ export const deleteSkillCategory = async (id: string) => {
 export const getSiteMetadata = async (): Promise<SiteData & { id: string } | null> => {
     const docRef = doc(db, 'site', 'metadata');
     const docSnap = await getDoc(docRef);
-    return docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } : null;
+    return docSnap.exists() ? { id: docSnap.id, ...(docSnap.data() as SiteData) } : null;
 };
 
 export const updateSiteMetadata = async (metadata: Record<string, unknown>) => {

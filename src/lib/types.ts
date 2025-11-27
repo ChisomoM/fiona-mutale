@@ -1,5 +1,3 @@
-import type { Timestamp } from "firebase/firestore"
-
 export interface User_info {
 name: string
 title: string
@@ -8,7 +6,7 @@ email: string
 phone: string
 location: string
 user : string
-updatedAt: Timestamp
+updatedAt: any
 social: Record<string, string>
 }
 
@@ -23,7 +21,7 @@ certifications_subtext : string
 contact_title : string
 contact_subtext : string
 certifications: string[]
-updatedAt: Timestamp
+updatedAt: any
 }
 
 export interface Experience {
@@ -37,8 +35,8 @@ description: string
 skills: string[]
 order?: number
 isActive?: boolean
-createdAt : Timestamp
-updatedAt: Timestamp
+createdAt : any
+updatedAt: any
 }
 
 export interface Education {
@@ -47,16 +45,16 @@ field : string
 institution : string
 dates : string
 order?: number
-createdAt : Timestamp
-updatedAt: Timestamp
+createdAt : any
+updatedAt: any
 }
 
 export interface SkillCategory {
 name : string
 order? : number
 skills : string[]
-createdAt : Timestamp
-updatedAt: Timestamp
+createdAt : any
+updatedAt: any
 }
 
 export interface Service {
@@ -65,15 +63,15 @@ description: string
 icon: string
 features:string[]
 order?: number
-createdAt? : Timestamp
-updatedAt?: Timestamp
+createdAt? : any
+updatedAt?: any
 }
 
 export interface contactMessage {
 name: string
 email: string
 message: string
-timestamp: Timestamp
+timestamp: any
 }
 
 // interface SiteSection {
