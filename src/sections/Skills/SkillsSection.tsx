@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, SectionHeader } from '../../components/ui';
-import { siteData } from '../../data/site';
+import { getSkillCategories } from '../../lib/adminService';
 import { 
   Calculator, 
   Database, 
@@ -10,20 +10,54 @@ import {
   FileSpreadsheet
 } from 'lucide-react';
 
+interface SkillCategory {
+  id: string;
+  name: string;
+  skills: string[];
+  order: number;
+}
+
 // Skill category icons mapping
 const categoryIcons: { [key: string]: React.ComponentType<{ size?: number; className?: string }> } = {
-  core: Calculator,
-  technical: Database,
-  business: Users
-};
-
-const skillCategoryTitles: { [key: string]: string } = {
-  core: "Core Finance & NetSuite",
-  technical: "Technical Skills",
-  business: "Business & Leadership"
+  'Core Finance & NetSuite': Calculator,
+  'Technical Skills': Database,
+  'Business & Leadership': Users
 };
 
 export const SkillsSection: React.FC = () => {
+  const [skillCategories, setSkillCategories] = useState<SkillCategory[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const data = await getSkillCategories();
+        setSkillCategories(data);
+      } catch (error) {
+        console.error('Error fetching skills:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkills();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="skills" className="py-20 bg-gradient-to-b from-transparent via-gray-900/50 to-transparent relative overflow-hidden">
+        <Container>
+          <div className="relative max-w-6xl mx-auto">
+            <SectionHeader
+              title="Skills"
+              subtitle="Technical proficiency in NetSuite, finance systems, and business analysis"
+            />
+            <div className="text-center text-gray-400">Loading...</div>
+          </div>
+        </Container>
+      </section>
+    );
+  }
   return (
     <section id="skills" className="py-20 bg-gradient-to-b from-transparent via-gray-900/50 to-transparent relative overflow-hidden">
       {/* Background decorations */}
@@ -36,17 +70,17 @@ export const SkillsSection: React.FC = () => {
       <Container>
         <div className="relative max-w-6xl mx-auto">
           <SectionHeader
-            title="Skills & Expertise"
+            title="Skills"
             subtitle="Technical proficiency in NetSuite, finance systems, and business analysis"
           />
 
           {/* Skills Categories */}
           <div className="mt-16 space-y-12">
-            {(Object.entries(siteData.skills) as [string, string[]][]).map(([category, skillList]) => {
-              const IconComponent = categoryIcons[category] || BarChart3;
+            {skillCategories.map((category) => {
+              const IconComponent = categoryIcons[category.name] || BarChart3;
               
               return (
-                <div key={category} className="relative">
+                <div key={category.id} className="relative">
                   {/* Category Header */}
                   <div className="flex items-center mb-8">
                     <div className="flex items-center justify-center w-12 h-12 bg-primary-600/20 rounded-xl border border-primary-500/30 mr-4">
@@ -54,14 +88,14 @@ export const SkillsSection: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-white">
-                        {skillCategoryTitles[category] || category}
+                        {category.name}
                       </h3>
                     </div>
                   </div>
 
                   {/* Skills Grid */}
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {skillList.map((skill) => (
+                    {category.skills.map((skill) => (
                       <div
                         key={skill}
                         className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4 hover:bg-white/10 hover:border-primary-500/30 transition-all duration-300"

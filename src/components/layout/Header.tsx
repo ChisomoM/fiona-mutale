@@ -11,8 +11,10 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
   const navItems = [
     { id: 'home', label: 'Home' },
         { id: 'about-me', label: 'About Me' },
-    { id: 'services', label: 'Services' },
-    { id: 'projects', label: 'My Work' },
+    { id: 'services', label: 'Expertise' },
+     { id: 'experience', label: 'Experience' },
+    { id: 'education-certifications', label: 'Education & Certifications' },
+    // { id: 'projects', label: 'My Work' },
     // { id: 'about', label: 'Reviews' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -106,7 +108,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection = 'home' }) => {
             </Button>
             
             {/* Mobile Menu Button - placeholder for now */}
-            <button className="md:hidden p-2 text-gray-300 hover:text-white">
+            <button aria-label="Toggle mobile menu" className="md:hidden p-2 text-gray-300 hover:text-white">
               <svg
                 className="w-6 h-6"
                 fill="none"

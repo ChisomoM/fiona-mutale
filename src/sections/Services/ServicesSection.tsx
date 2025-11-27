@@ -8,9 +8,8 @@ import {
 } from 'lucide-react';
 
 
-import { db } from '../../lib/firebase';
+import { getServices } from '../../lib/adminService';
 import type { Service } from '../../lib/types';
-import { collection, getDocs } from 'firebase/firestore';
 
 // Service icons mapping
 const serviceIcons: { [key: string]: React.ComponentType<{ size?: number; className?: string }> } = {
@@ -28,13 +27,8 @@ export const ServicesSection: React.FC = () => {
     const fetchServices = async () => {
       try {
         setLoading(true);
-        const querySnapshot = await getDocs(collection(db, 'services'));
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const servicesData = querySnapshot.docs.map((doc: any) => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setServices(servicesData as unknown as Service[]);
+        const servicesData = await getServices();
+        setServices(servicesData);
       } catch(e) {
         console.log(`Error fetching Services ${e}`);
       } finally {
@@ -57,7 +51,7 @@ export const ServicesSection: React.FC = () => {
       <Container>
         <div className="relative max-w-6xl mx-auto">
           <SectionHeader
-            title="Services"
+            title="Expertise"
             subtitle="Expert NetSuite and finance automation consulting services"
           />
           

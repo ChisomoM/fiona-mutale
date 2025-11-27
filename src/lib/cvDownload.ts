@@ -21,7 +21,7 @@ export const downloadCV = (
       // Create a temporary link for direct download
       const link = document.createElement('a');
       link.href = cvPath;
-      link.download = 'Chisomo-Mutale-CV.pdf';
+      link.download = 'FIONA-MUTALE-CV-2025.pdf';
       link.style.display = 'none';
       
       document.body.appendChild(link);

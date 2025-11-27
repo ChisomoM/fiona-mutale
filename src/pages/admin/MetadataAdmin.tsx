@@ -18,6 +18,8 @@ export const MetadataAdmin = () => {
         location: string;
         cvPath: string;
         profile: string;
+        about_me: string;
+        about_quote: string;
         certifications: string[];
         social: {
             linkedin: string;
@@ -32,6 +34,8 @@ export const MetadataAdmin = () => {
         location: '',
         cvPath: '',
         profile: '',
+        about_me: '',
+        about_quote: '',
         certifications: [],
         social: {
             linkedin: '',
@@ -190,6 +194,24 @@ export const MetadataAdmin = () => {
                                 value={formData.profile || ''}
                                 onChange={(e) => updateFormField('profile', e.target.value)}
                                 rows={6}
+                                className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium mb-2">About Me Section Text</label>
+                            <textarea
+                                value={formData.about_me || ''}
+                                onChange={(e) => updateFormField('about_me', e.target.value)}
+                                rows={4}
+                                className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium mb-2">About Me Quote</label>
+                            <textarea
+                                value={formData.about_quote || ''}
+                                onChange={(e) => updateFormField('about_quote', e.target.value)}
+                                rows={3}
                                 className="w-full px-3 py-2 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                             />
                         </div>

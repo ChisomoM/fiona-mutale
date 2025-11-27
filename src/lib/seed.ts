@@ -63,6 +63,8 @@ export const seedDatabase = async () => {
             location: siteData.location,
             cvPath: siteData.cvPath,
             profile: siteData.profile,
+            about_me: `Welcome to my portfolio! I'm ${siteData.name}, ${siteData.title}.`,
+            about_quote: 'I am deeply committed to my work.',
             social: siteData.social,
             certifications: siteData.certifications,
             updatedAt: serverTimestamp()

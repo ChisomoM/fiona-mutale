@@ -1,15 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CVDownloadButton } from '../../components/domain';
-import { siteData } from '../../data/site';
+import { getSiteMetadata } from '../../lib/adminService';
 import { seedDatabase } from '../../lib/seed'
 
 export const HeroSection: React.FC = () => {
+  const [metadata, setMetadata] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadMetadata = async () => {
+      try {
+        const data = await getSiteMetadata();
+        setMetadata(data);
+      } catch (error) {
+        console.error('Error loading metadata:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMetadata();
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  if (loading) {
+    return (
+      <section id="home" className="min-h-screen flex items-center relative overflow-hidden">
+        <div className="text-center text-gray-400">Loading...</div>
+      </section>
+    );
+  }
+
+  if (!metadata) {
+    return null;
+  }
 
   return (
     <section id="home" className="min-h-screen flex items-center relative overflow-hidden">
@@ -38,9 +68,11 @@ export const HeroSection: React.FC = () => {
       </div>
 
       <div className="relative pt-20 pb-20 w-full z-10">
-        <div className="text-left space-y-8 max-w-6xl mx-auto px-8 lg:px-16">
-          {/* Welcome text */}
-          <div className="space-y-4">
+        <div className="max-w-6xl mx-auto px-8 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Left side - Content */}
+          <div className="text-left space-y-8 lg:-mr-20 xl:-mr-28">
+            {/* Welcome text */}
+            <div className="space-y-4">
             <p 
               className="font-medium tracking-widest cursor-pointer uppercase text-xs hover:"
               style={{ color: 'var(--color-primary-300)' }}
@@ -64,24 +96,24 @@ export const HeroSection: React.FC = () => {
               >
                 Hi, I'm{' '}
                 <span style={{ color: 'var(--color-text-primary)' }}>
-                  {siteData.name.split(' ')[0]}
+                  {metadata.name.split(' ')[0]}
                 </span>
               </h1>
-              <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">
+              <h2 className="text-2xl max-w-5xl md:text-4xl lg:text-5xl font-bold">
                 <span className="bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">
-                  {siteData.title.split('|')[0].trim()}
+                  {metadata.title.split('|')[0].trim()}
                 </span>
               </h2>
             </div>
           </div>
 
           {/* Bio */}
-          <p 
+          {/* <p 
             className="text-base md:text-lg max-w-2xl leading-relaxed"
             style={{ color: 'var(--color-text-muted)' }}
           >
-            {siteData.profile.slice(0, 150)}...
-          </p>
+            {metadata.profile.slice(0, 150)}...
+          </p> */}
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -107,7 +139,7 @@ export const HeroSection: React.FC = () => {
               </svg>
             </Button> */}
             <CVDownloadButton
-              cvPath={siteData.cvPath}
+              cvPath={metadata.cvPath}
               variant="outline"
               size="lg"
               showFileSize={true}
@@ -118,7 +150,7 @@ export const HeroSection: React.FC = () => {
           {/* Social Links */}
           <div className="flex space-x-4 pt-6">
             <a
-              href={`mailto:${siteData.email}`}
+              href={`mailto:${metadata.email}`}
               className="w-12 h-12 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
               style={{
                 backgroundColor: 'var(--color-surface-elevated)',
@@ -133,7 +165,7 @@ export const HeroSection: React.FC = () => {
               </svg>
             </a>
             <a
-              href={siteData.social.linkedin}
+              href={metadata.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="w-14 h-14 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
@@ -149,7 +181,7 @@ export const HeroSection: React.FC = () => {
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
             </a>
-            <a
+            {/* <a
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -167,7 +199,7 @@ export const HeroSection: React.FC = () => {
               </svg>
             </a>
             <a
-              href={`mailto:${siteData.email}`}
+              href={`mailto:${metadata.email}`}
               className="w-14 h-14 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
               style={{
                 backgroundColor: 'var(--color-surface-elevated)',
@@ -180,9 +212,23 @@ export const HeroSection: React.FC = () => {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-            </a>
+            </a> */}
+          </div>
           </div>
 
+          {/* Right side - Image */}
+          <div className="hidden lg:flex justify-center items-center">
+            <div className="relative">
+              <img 
+                src="/duoi.png" 
+                alt="Fiona M Mutale"
+                className="w-full max-w-lg rounded-3xl"
+                style={{
+                  filter: 'drop-shadow(0 0 40px rgba(236, 72, 153, 0.2)) drop-shadow(0 0 80px rgba(219, 39, 119, 0.1))'
+                }}
+              />
+            </div>
+          </div>
         </div>
         
         {/* Scroll indicator - positioned at bottom center */}

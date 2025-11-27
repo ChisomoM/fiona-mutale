@@ -7,6 +7,7 @@ import {
   SkillsSection,
   ServicesSection,
   ExperienceSection,
+  EducationAndCertificationsSection,
   // ProjectsSection, 
   ContactSection 
 } from './sections';
@@ -28,6 +29,7 @@ function MainSite() {
       <ServicesSection />
       <SkillsSection />
       <ExperienceSection />
+      <EducationAndCertificationsSection />
       {/* <ProjectsSection /> */}
       <ContactSection />
     </AppShell>

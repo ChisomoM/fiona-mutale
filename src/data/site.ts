@@ -54,7 +54,7 @@ export const siteData: SiteData = {
   email: "fmutale@gmail.com",
   phone: "",
   location: "London Area, England",
-  cvPath: "",
+  cvPath: "/FIONA-MUTALE-CV-2025.pdf",
   
   profile: `A proactive NetSuite professional specializing in finance automation and system optimization. I excel in NetSuite's core accounting functionality—from account configuration and data migration to testing and user adoption.
 

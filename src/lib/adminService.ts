@@ -139,3 +139,9 @@ export const updateSiteMetadata = async (metadata: Record<string, unknown>) => {
         updatedAt: serverTimestamp()
     });
 };
+
+// Certifications (stored in site metadata)
+export const getCertifications = async () => {
+    const metadata = await getSiteMetadata();
+    return metadata?.certifications || [];
+};

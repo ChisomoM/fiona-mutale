@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from '../../components/ui';
 import { CVDownloadButton } from '../../components/domain';
-import { siteData } from '../../data/site';
+import { getSiteMetadata } from '../../lib/adminService';
 
 export const AboutSection: React.FC = () => {
+  const [metadata, setMetadata] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadMetadata = async () => {
+      try {
+        const data = await getSiteMetadata();
+        setMetadata(data);
+      } catch (error) {
+        console.error('Error loading metadata:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMetadata();
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="about-me" className="py-20">
+        <Container>
+          <div className="text-center">Loading...</div>
+        </Container>
+      </section>
+    );
+  }
+
+  if (!metadata) {
+    return null;
+  }
   return (
     <section 
       id="about-me" 
@@ -51,20 +82,14 @@ export const AboutSection: React.FC = () => {
                 className="text-lg leading-relaxed"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
-                Welcome to my portfolio! I'm {siteData.name}, a passionate software developer 
-                dedicated to creating seamless and visually engaging digital experiences. With 
-                2 years of experience, I specialize in designing intuitive interfaces that enhance 
-                usability and user satisfaction.
+                {metadata.about_me || `Welcome to my portfolio! I'm ${metadata.name}, ${metadata.title}.`}
               </p>
               
               <p 
                 className="text-lg leading-relaxed"
                 style={{ color: 'var(--color-text-secondary)' }}
               >
-                My skills include wireframing, prototyping, and user research, ensuring that 
-                each design is both aesthetically pleasing and functionally efficient. I have 
-                worked on diverse projects, including mobile apps, web platforms, and 
-                interactive dashboards, always focusing on user-centered solutions that drive engagement.
+                {metadata.profile}
               </p>
               
               {/* Highlighted quote section */}
@@ -87,8 +112,7 @@ export const AboutSection: React.FC = () => {
                   className="font-medium text-lg leading-relaxed"
                   style={{ color: 'var(--color-primary-200)' }}
                 >
-                  I am deeply committed to my work, investing creativity and precision in 
-                  every project to ensure a unique and effective user experience.
+                  {metadata.about_quote || 'I am deeply committed to my work, investing creativity and precision in every project to ensure a unique and effective user experience.'}
                 </p>
               </div>
               
@@ -111,7 +135,7 @@ export const AboutSection: React.FC = () => {
                   }}
                 >
                   <CVDownloadButton
-                    cvPath={siteData.cvPath}
+                    cvPath={metadata.cvPath}
                     variant="primary"
                     size="lg"
                     showFileSize={true}
