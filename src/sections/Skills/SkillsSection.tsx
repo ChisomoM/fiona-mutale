@@ -6,8 +6,8 @@ import {
   Database, 
   BarChart3, 
   Users,
-  TrendingUp,
-  FileSpreadsheet
+  // TrendingUp,
+  // FileSpreadsheet
 } from 'lucide-react';
 
 interface SkillCategory {
@@ -115,7 +115,7 @@ export const SkillsSection: React.FC = () => {
           </div>
 
           {/* Key Achievements/Stats */}
-          <div className="mt-20 grid md:grid-cols-3 gap-8">
+          {/* <div className="mt-20 grid md:grid-cols-3 gap-8">
             <div className="text-center bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
               <div className="flex justify-center mb-4">
                 <TrendingUp size={32} className="text-primary-400" />
@@ -139,7 +139,7 @@ export const SkillsSection: React.FC = () => {
               <div className="text-3xl font-bold text-white mb-2">Multiple</div>
               <div className="text-gray-400">NetSuite Certifications</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </Container>
     </section>

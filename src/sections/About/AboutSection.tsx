@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from '../../components/ui';
 import { CVDownloadButton } from '../../components/domain';
 import { getSiteMetadata } from '../../lib/adminService';
+import { siteData } from '../../data/site';
 
 export const AboutSection: React.FC = () => {
   const [metadata, setMetadata] = useState<any>(null);
@@ -60,11 +61,8 @@ export const AboutSection: React.FC = () => {
       </div>
       
       <Container>
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left side - Empty/minimal as per design */}
-          <div className="hidden lg:block">
-            {/* Intentionally minimal/empty to match the design */}
-          </div>
+        <div className="items-start">
+       
           
           {/* Right side - Content */}
           <div className="space-y-8">
@@ -135,7 +133,7 @@ export const AboutSection: React.FC = () => {
                   }}
                 >
                   <CVDownloadButton
-                    cvPath={metadata.cvPath}
+                    cvPath={siteData.cvPath}
                     variant="primary"
                     size="lg"
                     showFileSize={true}

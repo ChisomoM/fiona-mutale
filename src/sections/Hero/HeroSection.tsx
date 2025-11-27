@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { CVDownloadButton } from '../../components/domain';
 import { getSiteMetadata } from '../../lib/adminService';
-import { seedDatabase } from '../../lib/seed'
+import { siteData } from '../../data/site';
+import { seedDatabase } from '../../lib/seed';
+
 
 export const HeroSection: React.FC = () => {
   const [metadata, setMetadata] = useState<any>(null);
@@ -139,7 +141,7 @@ export const HeroSection: React.FC = () => {
               </svg>
             </Button> */}
             <CVDownloadButton
-              cvPath={metadata.cvPath}
+              cvPath={siteData.cvPath}
               variant="outline"
               size="lg"
               showFileSize={true}
