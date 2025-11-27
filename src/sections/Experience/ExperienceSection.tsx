@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container } from '../../components/ui/Container';
 import { SectionHeader } from '../../components/ui/SectionHeader';
 import { getExperience } from '../../lib/adminService';

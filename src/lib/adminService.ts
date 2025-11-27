@@ -11,7 +11,7 @@ import {
     orderBy 
 } from 'firebase/firestore';
 import { db } from './firebase';
-import type { Experience, Education, SkillCategory, Service } from './types';
+import type { Experience, Education, SkillCategory, Service, SiteData } from './types';
 
 // Services CRUD
 export const getServices = async () => {
@@ -126,7 +126,7 @@ export const deleteSkillCategory = async (id: string) => {
 };
 
 // Site Metadata
-export const getSiteMetadata = async () => {
+export const getSiteMetadata = async (): Promise<SiteData & { id: string } | null> => {
     const docRef = doc(db, 'site', 'metadata');
     const docSnap = await getDoc(docRef);
     return docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } : null;

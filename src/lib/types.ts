@@ -22,6 +22,7 @@ education_subtext : string
 certifications_subtext : string
 contact_title : string
 contact_subtext : string
+certifications: string[]
 updatedAt: Timestamp
 }
 
