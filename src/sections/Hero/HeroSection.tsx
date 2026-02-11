@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CVDownloadButton } from '../../components/domain';
+// import { CVDownloadButton } from '../../components/domain';
 import { getSiteMetadata } from '../../lib/adminService';
 import { siteData } from '../../data/site';
 import { seedDatabase } from '../../lib/seed';
@@ -140,13 +140,32 @@ export const HeroSection: React.FC = () => {
                 />
               </svg>
             </Button> */}
-            <CVDownloadButton
+            <button
+              onClick={() => scrollToSection('about-me')}
+              className="group border border-pink-500 text-pink-300 hover:bg-pink-500 hover:text-white rounded-full px-8 py-3 font-semibold text-base transition-all duration-300 w-fit flex items-center"
+            >
+              <span>Learn more about me</span>
+              <svg
+                className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </button>
+            {/* <CVDownloadButton
               cvPath={siteData.cvPath}
               variant="outline"
               size="lg"
               showFileSize={true}
               className="border border-pink-500 text-pink-300 hover:bg-pink-500 hover:text-white rounded-full px-8 py-3 font-semibold text-base transition-all duration-300 w-fit"
-            />
+            /> */}
           </div>
 
           {/* Social Links */}

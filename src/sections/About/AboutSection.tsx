@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from '../../components/ui';
-import { CVDownloadButton } from '../../components/domain';
+// import { CVDownloadButton } from '../../components/domain';
 import { getSiteMetadata } from '../../lib/adminService';
 import { siteData } from '../../data/site';
 
@@ -114,8 +114,34 @@ export const AboutSection: React.FC = () => {
                 </p>
               </div>
               
-              {/* CV Download button */}
               <div className="pt-6">
+                <button
+                  onClick={() => {
+                    const element = document.getElementById('contact');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="inline-block font-medium rounded-full transition-all duration-300 px-8 py-4"
+                  style={{
+                    background: 'linear-gradient(to right, var(--color-primary-600), var(--color-primary-500))',
+                    boxShadow: 'var(--shadow-lg)',
+                    color: 'white'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(to right, var(--color-primary-700), var(--color-primary-600))';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-glow)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(to right, var(--color-primary-600), var(--color-primary-500))';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+                  }}
+                >
+                  Contact Me
+                </button>
+              </div>
+              
+              {/* <div className="pt-6">
                 <div
                   className="inline-block font-medium rounded-full transition-all duration-300"
                   style={{
@@ -140,7 +166,7 @@ export const AboutSection: React.FC = () => {
                     className="bg-transparent border-none text-inherit shadow-none p-4"
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
