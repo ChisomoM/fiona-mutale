@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from '../../components/ui';
 // import { CVDownloadButton } from '../../components/domain';
 import { getSiteMetadata } from '../../lib/adminService';
-import { siteData } from '../../data/site';
+// import { siteData } from '../../data/site';
 
 export const AboutSection: React.FC = () => {
   const [metadata, setMetadata] = useState<any>(null);

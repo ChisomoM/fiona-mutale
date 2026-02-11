@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import { CVDownloadButton } from '../../components/domain';
 import { getSiteMetadata } from '../../lib/adminService';
-import { siteData } from '../../data/site';
+// import { siteData } from '../../data/site';
 import { seedDatabase } from '../../lib/seed';
 
 
